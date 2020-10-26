@@ -153,6 +153,10 @@
       var active = false;
       var startTime = 0;
       var period = 0;
+      var time = 0;
+      var add = 0;
+      var time2 = 0;
+
 
     
     // ボタンの初期設定
@@ -182,23 +186,25 @@
     
     // ButtonAがクリックされた時の処理
     function btnAClick(e){
-      active = true;
-      startTime = new Date();
-      
+        active = true;
+        console.log("a");
         
         
     }
 
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
-      active = false;
-      
+        time2 = time;
+        console.log(time2);
+        active = false;
+
         
         
     }
 
     // ButtonCがクリックされた時の処理
-    function btnCClick(e){
+    function btnCClick(e){  
+        startTime = new Date();          
         alarm();
         active = false;
         period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val() );
@@ -212,7 +218,7 @@
     // 繰り返し実行する処理
     function timer(){  
         if (active){
-          var time = parseInt( (new Date() - startTime)/1000 );
+          time = parseInt( (new Date() - startTime)/1000 );
           var rest = period - time;
           $("#time").html("経過時間：" + time);
           $("#remain").html("残り時間：" + rest);
@@ -220,9 +226,9 @@
           if(rest<=0){
             active = false;
             alarm();
-          }
-        }
-        
+          }   
+
+      }
     } 
 
   </script>

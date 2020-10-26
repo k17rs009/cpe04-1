@@ -219,8 +219,18 @@
       time2 = 0;
         
     }
-    
- 
+    // ButtonDがクリックされた時の処理
+    function btnDClick(e){
+      period = 60*3;
+      active = true;
+      startTime = new Date();
+    }
+    // ButtonEがクリックされた時の処理 
+    function btnEClick(e){
+      period = 60*5;
+      active = true;
+      startTime = new Date();
+    }
     // 繰り返し実行する処理
     function timer(){ 
       if(add == 0){ 
@@ -263,7 +273,9 @@
     <div id="time">Time</div>
     <button id="btnA">スタート</button>  
     <button id="btnB">ストップ</button>  
-    <button id="btnC">リセット</button>  
+    <button id="btnC">リセット</button> 
+    <button id="btnD">3分タイマー</button>
+    <button id="btnE">5分タイマー</button>
     <input type="number" id="minute" value=3 >
     <input type="number" id="second" value=0 >
 </body>

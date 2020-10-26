@@ -37,6 +37,15 @@
 
         $('#btnC').click(function(e) {
             btnCClick(e);
+
+        });
+         $('#btnD').click(function(e) {
+            btnDClick(e);
+
+        });
+         $('#btnE').click(function(e) {
+            btnEClick(e);
+
         });
         init();
     });
@@ -154,9 +163,8 @@
       var startTime = 0;
       var period = 0;
       var time = 0;
-      var add = 0;
       var time2 = 0;
-
+      var add = 0;
 
     
     // ボタンの初期設定
@@ -164,6 +172,8 @@
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
+        $('#btnD').prop('disabled', false);
+        $('#btnE').prop('disabled', false);
         btnCClick(null);
     }
 
@@ -186,38 +196,35 @@
     
     // ButtonAがクリックされた時の処理
     function btnAClick(e){
-        active = true;
-        console.log("a");
-        
-        
+      startTime = new Date();
+      active = true;
+      add += 1;
     }
 
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
-        time2 = time;
-        console.log(time2);
-        active = false;
-
-        
-        
+      active = false;
+      time2 = time2 + (new Date() - startTime);
+      console.log(time2);
     }
 
     // ButtonCがクリックされた時の処理
-    function btnCClick(e){  
-        startTime = new Date();          
-        alarm();
-        active = false;
-        period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val() );
-        $("#time").html("経過時間： 0");
-        $("#semain").html("残り時間：" + period);
-
+    function btnCClick(e){          
+      //alarm();
+      active = false;
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val() );
+      $("#time").html("経過時間： 0");
+      $("#semain").html("残り時間：" + period);
+      add = 0;
+      time2 = 0;
         
     }
     
  
     // 繰り返し実行する処理
-    function timer(){  
-        if (active){
+    function timer(){ 
+      if(add == 0){ 
+        if (active == true){
           time = parseInt( (new Date() - startTime)/1000 );
           var rest = period - time;
           $("#time").html("経過時間：" + time);
@@ -228,6 +235,19 @@
             alarm();
           }   
 
+        }
+      }else{
+        if (active == true){
+          time = parseInt( ((new Date() - startTime)+time2)/1000 );
+          var rest = period - time;
+          $("#time").html("経過時間：" + time);
+          $("#remain").html("残り時間：" + rest);
+          analog(rest);
+          if(rest<=0){
+            active = false;
+            alarm();
+          }
+        }
       }
     } 
 
